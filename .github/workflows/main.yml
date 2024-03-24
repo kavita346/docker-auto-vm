@@ -29,7 +29,7 @@ jobs:
        unzip awscliv2.zip
        sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
        aws configure set aws_access_key_id "${{ secrets.KAVITA_AWS_ACCESS_KEY }}"
-       aws configure set aws_access_key_id "${{ secrets.KAVITA_AWS_ACCESS_SECRET }}"
+       aws configure set aws_secret_access_key "${{ secrets.KAVITA_AWS_ACCESS_SECRET }}"
        aws configure set default.region eu-north-1
        aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 128342337960.dkr.ecr.eu-north-1.amazonaws.com
        docker tag hello-world 128342337960.dkr.ecr.eu-north-1.amazonaws.com/hello-world-flask/hello-world
