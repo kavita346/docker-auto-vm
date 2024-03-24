@@ -30,4 +30,5 @@ jobs:
     - name: Deploy code to EC2
       run: |
        scp -i "${{ secrets.ABC_CLIENT_MACHINE_SSH }}" ./redeploy.sh ubuntu@"${{ secrets.ABC_CLIENT_MACHINE_SSH_IP }}":/home/ubuntu/auto/
-       ssh -i "${{ secrets.ABC_CLIENT_MACHINE_SSH }}" "${{ secrets.ABC_CLIENT_MACHINE_SSH_USER_NAME }}"@"${{ secrets.ABC_CLIENT_MACHINE_SSH_IP }}" './home/ubuntu/auto/redeploy.sh'
+       ssh -i "${{ secrets.ABC_CLIENT_MACHINE_SSH }}" "${{ secrets.ABC_CLIENT_MACHINE_SSH_USER_NAME }}"@"${{ secrets.ABC_CLIENT_MACHINE_SSH_IP }}" 'sudo chmod +rx /home/ubuntu/auto/redeploy.sh'
+       ssh -i "${{ secrets.ABC_CLIENT_MACHINE_SSH }}" "${{ secrets.ABC_CLIENT_MACHINE_SSH_USER_NAME }}"@"${{ secrets.ABC_CLIENT_MACHINE_SSH_IP }}" 'sh /home/ubuntu/auto/redeploy.sh'
