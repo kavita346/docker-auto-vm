@@ -32,8 +32,8 @@ jobs:
        aws configure set aws_secret_access_key "${{ secrets.KAVITA_AWS_ACCESS_SECRET }}"
        aws configure set default.region eu-north-1
        aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 128342337960.dkr.ecr.eu-north-1.amazonaws.com
-       docker tag hello-world 128342337960.dkr.ecr.eu-north-1.amazonaws.com/hello-world-flask/hello-world
-       docker push 128342337960.dkr.ecr.eu-north-1.amazonaws.com/hello-world-flask/hello-world
+       docker tag hello-world 128342337960.dkr.ecr.eu-north-1.amazonaws.com/hello-world-flask
+       docker push 128342337960.dkr.ecr.eu-north-1.amazonaws.com/hello-world-flask
        
     - name: Install SSH key
       run: |
