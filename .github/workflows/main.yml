@@ -9,18 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
+    steps: |
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Build Docker Image
       run: docker build -t hello-world .
-
-    - name: Tagging Docker Image
       run: docker tag hello-world kavita346/hello-world
-      
-    - name: Login to GitHub Container Registry
       run: echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME_SAI40 }}" --password-stdin
-
-    - name: Pushing Docker Image
       run: docker push kavita346/hello-world
