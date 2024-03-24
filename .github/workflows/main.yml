@@ -13,9 +13,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build Docker Image & Push to Docker Hub
+    - name: Build Docker Image
       run: |
        docker build -t hello-world .
+       
+    - name: Push Docker Image to Docker Hub
+      run: |
        docker tag hello-world "${{ secrets.DOCKER_USERNAME_SAI40 }}"/hello-world
        echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME_SAI40 }}" --password-stdin
        docker push "${{ secrets.DOCKER_USERNAME_SAI40 }}"/hello-world
