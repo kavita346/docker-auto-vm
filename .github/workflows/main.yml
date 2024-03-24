@@ -16,6 +16,18 @@ jobs:
     - name: Build Docker Image & Push
       run: |
        docker build -t hello-world .
-       docker tag hello-world "${{ secrets.DOCKER_USERNAME_SAI40 }}"/hello-world
+       docker tag hello-world kavita346/hello-world
        echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME_SAI40 }}" --password-stdin
        docker push "${{ secrets.DOCKER_USERNAME_SAI40 }}"/hello-world
+       
+    - name: Install SSH key
+      run: |
+       mkdir -p ~/.ssh
+       echo "${{ secrets.ABC_CLIENT_MACHINE_SSH }}" > ~/.ssh/id_rsa
+       chmod 600 ~/.ssh/id_rsa
+       ssh-keyscan -H "${{ secrets.ABC_CLIENT_MACHINE_SSH_IP }}" >> ~/.ssh/known_hosts
+       
+    - name: Deploy code to EC2
+      run: |
+       scp -i "${{ secrets.ABC_CLIENT_MACHINE_SSH }}" ./redeploy.sh ubuntu@"${{ secrets.ABC_CLIENT_MACHINE_SSH_IP }}":/home/ubuntu/auto/
+       ssh -i "${{ secrets.ABC_CLIENT_MACHINE_SSH }}" "${{ secrets.ABC_CLIENT_MACHINE_SSH_USER_NAME }}"@"${{ secrets.ABC_CLIENT_MACHINE_SSH_IP }}" './home/ubuntu/auto/redeploy.sh'
