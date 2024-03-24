@@ -16,7 +16,7 @@ jobs:
     - name: Build Docker Image & Push
       run: |
        docker build -t hello-world .
-       docker tag hello-world kavita346/hello-world
+       docker tag hello-world "${{ secrets.DOCKER_USERNAME_SAI40 }}"/hello-world
        echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME_SAI40 }}" --password-stdin
        docker push "${{ secrets.DOCKER_USERNAME_SAI40 }}"/hello-world
        
