@@ -21,3 +21,6 @@ jobs:
       
     - name: Login to GitHub Container Registry
       run: echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME_SAI40 }}" --password-stdin
+
+    - name: Pushing Docker Image
+      run: docker push kavita346/hello-world
