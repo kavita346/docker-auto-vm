@@ -9,12 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps: |
+    steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name : Build & Push Image
-      run: docker build -t hello-world .
-      run: docker tag hello-world "${{ secrets.DOCKER_USERNAME_SAI40 }}"/hello-world
-      run: echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME_SAI40 }}" --password-stdin
-      run: docker push "${{ secrets.DOCKER_USERNAME_SAI40 }}"/hello-world
+    - name: Build Docker Image & Push
+      run: |
+       docker build -t hello-world .
+       docker tag hello-world kavita346/hello-world
+       echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME_SAI40 }}" --password-stdin
+       docker push "${{ secrets.DOCKER_USERNAME_SAI40 }}"/hello-world
