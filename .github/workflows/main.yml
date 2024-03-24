@@ -20,4 +20,4 @@ jobs:
       run: docker tag hello-world kavita346/hello-world
       
     - name: Login to GitHub Container Registry
-      run: echo "${{ secrets.docker_passord_token }}" | docker login -u "${{ secrets.docker_username_sai40 }}" --password-stdin
+      run: echo "${{ secrets.DOCKER_PASSWORD_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME_SAI40 }}" --password-stdin
